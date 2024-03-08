@@ -23,7 +23,7 @@ logging:
         SQL: DEBUG
 
 server:
-  port: 8080
+  port: 8084
 
 eureka:
   client:
