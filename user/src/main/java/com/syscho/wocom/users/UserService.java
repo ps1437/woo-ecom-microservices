@@ -1,7 +1,8 @@
 package com.syscho.wocom.users;
 
-import com.syscho.wocom.users.entity.UserEntity;
-import com.syscho.wocom.users.entity.UserRepository;
+import com.syscho.wocom.users.dto.UserDTO;
+import com.syscho.wocom.users.repo.UserEntity;
+import com.syscho.wocom.users.repo.UserRepository;
 import com.syscho.wocom.users.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

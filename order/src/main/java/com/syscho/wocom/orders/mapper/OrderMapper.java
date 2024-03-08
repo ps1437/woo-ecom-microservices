@@ -1,5 +1,7 @@
-package com.syscho.wocom.orders;
+package com.syscho.wocom.orders.mapper;
 
+import com.syscho.wocom.orders.dto.OrderDTO;
+import com.syscho.wocom.orders.repo.OrderEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

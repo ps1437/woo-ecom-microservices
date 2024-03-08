@@ -1,5 +1,7 @@
-package com.syscho.wocom.carts;
+package com.syscho.wocom.carts.mapper;
 
+import com.syscho.wocom.carts.dto.CartItemDTO;
+import com.syscho.wocom.carts.repo.CartItemEntity;
 import org.mapstruct.Mapper;
 
 import java.util.List;

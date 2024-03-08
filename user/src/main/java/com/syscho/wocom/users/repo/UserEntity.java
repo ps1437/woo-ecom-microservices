@@ -1,4 +1,4 @@
-package com.syscho.wocom.users.entity;
+package com.syscho.wocom.users.repo;
 
 import jakarta.persistence.*;
 import lombok.Data;
