@@ -1,0 +1,27 @@
+spring:
+  jpa:
+    generate-ddl: 'true'
+    hibernate:
+      ddl-auto: none
+    database-platform: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      path: /h2-console
+      enabled: 'true'
+  datasource:
+    url: jdbc:h2:mem:ecom-db
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+        SQL: DEBUG
+
+server:
+  port: 8084
+syscho:
+  openapi:
+    url: http://localhost:8084
