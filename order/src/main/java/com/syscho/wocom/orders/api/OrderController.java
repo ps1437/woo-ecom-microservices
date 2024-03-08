@@ -1,4 +1,7 @@
-package com.syscho.wocom.orders;
+package com.syscho.wocom.orders.api;
+
+import com.syscho.wocom.orders.OrderService;
+import com.syscho.wocom.orders.dto.OrderDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package com.syscho.wocom.orders;
+package com.syscho.wocom.orders.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

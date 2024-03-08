@@ -1,4 +1,4 @@
-package com.syscho.wocom.orders;
+package com.syscho.wocom.orders.dto;
 
 import lombok.Data;
 

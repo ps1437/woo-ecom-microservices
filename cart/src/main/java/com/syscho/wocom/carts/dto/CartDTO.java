@@ -1,4 +1,4 @@
-package com.syscho.wocom.carts;
+package com.syscho.wocom.carts.dto;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

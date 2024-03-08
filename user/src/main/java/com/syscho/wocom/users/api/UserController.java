@@ -1,6 +1,6 @@
 package com.syscho.wocom.users.api;
 
-import com.syscho.wocom.users.UserDTO;
+import com.syscho.wocom.users.dto.UserDTO;
 import com.syscho.wocom.users.UserService;
 import com.syscho.wocom.users.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;

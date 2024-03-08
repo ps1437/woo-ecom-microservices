@@ -1,4 +1,4 @@
-package com.syscho.wocom.users;
+package com.syscho.wocom.users.dto;
 
 import lombok.Data;
 

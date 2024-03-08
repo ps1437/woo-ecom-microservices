@@ -1,4 +1,4 @@
-package com.syscho.wocom.carts;
+package com.syscho.wocom.carts.products;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

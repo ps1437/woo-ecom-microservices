@@ -1,4 +1,4 @@
-package com.syscho.wocom.carts;
+package com.syscho.wocom.carts.products;
 
 public class ProductNotFoundException extends RuntimeException {
 

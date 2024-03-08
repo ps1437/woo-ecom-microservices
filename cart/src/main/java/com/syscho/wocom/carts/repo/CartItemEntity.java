@@ -1,4 +1,4 @@
-package com.syscho.wocom.carts;
+package com.syscho.wocom.carts.repo;
 
 import jakarta.persistence.*;
 import lombok.Data;

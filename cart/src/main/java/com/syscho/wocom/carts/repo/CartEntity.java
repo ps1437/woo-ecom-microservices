@@ -1,5 +1,6 @@
-package com.syscho.wocom.carts;
+package com.syscho.wocom.carts.repo;
 
+import com.syscho.wocom.carts.repo.CartItemEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 
