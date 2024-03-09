@@ -12,6 +12,11 @@ spring:
       enabled: 'true'
   datasource:
     url: jdbc:h2:mem:ecom-db
+
+  cloud:
+    loadbalancer:
+      cache:
+        enable: false
 logging:
   level:
     org:
@@ -23,16 +28,20 @@ logging:
         SQL: DEBUG
 
 server:
-  port: 8088
+  port: 8086
 
 eureka:
   client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
+    fetch-registry: 'true'
+    register-with-eureka: 'true'
+    serviceUrl:
+      defaultZone: ${EUREKA_DEFAULT_ZONE:http://localhost:8761/eureka/}
+  instance:
+    preferIpAddress: 'true'
 
 
 syscho:
   openapi:
-    url: http://localhost:8088
+    url: http://localhost:8086
 
 

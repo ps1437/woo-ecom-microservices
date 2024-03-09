@@ -1,0 +1,75 @@
+version: '3'
+services:
+
+  service-discovery-server:
+    build:
+      context: ./service-discovery-server
+    ports:
+      - "8761:8761"  # Adjust the ports as needed
+    networks:
+      - mynetwork
+
+  cart:
+    build:
+      context: ./cart
+    ports:
+      - "8086:8086"  # Adjust the ports as needed
+    networks:
+      - mynetwork
+    depends_on:
+      - service-discovery-server
+    environment:
+    - EUREKA_DEFAULT_ZONE=http://service-discovery-server:8761/eureka/  
+
+  product:
+    build:
+      context: ./products
+    ports:
+      - "8085:8085"  # Adjust the ports as needed
+    networks:
+      - mynetwork
+    depends_on:
+      - service-discovery-server
+    environment:
+    - EUREKA_DEFAULT_ZONE=http://service-discovery-server:8761/eureka/  
+
+
+  user:
+    build:
+      context: ./user
+    ports:
+      - "8088:8088"  # Adjust the ports as needed
+    networks:
+      - mynetwork
+    depends_on:
+      - service-discovery-server
+    environment:
+    - EUREKA_DEFAULT_ZONE=http://service-discovery-server:8761/eureka/  
+
+  order:
+    build:
+      context: ./order
+    ports:
+      - "8087:8087"  # Adjust the ports as needed
+    networks:
+      - mynetwork
+    depends_on:
+      - service-discovery-server
+    environment:
+    - EUREKA_DEFAULT_ZONE=http://service-discovery-server:8761/eureka/  
+
+  gateway:
+    build:
+      context: ./gateway
+    ports:
+      - "8091:8091"  # Adjust the ports as needed
+    networks:
+      - mynetwork
+    depends_on:
+      - service-discovery-server
+    environment:
+    - EUREKA_DEFAULT_ZONE=http://service-discovery-server:8761/eureka/  
+
+networks:
+  mynetwork:
+    driver: bridge

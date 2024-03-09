@@ -6,12 +6,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(name = "product-api", url = "http://localhost:8080/api") // Update the URL accordingly
+//TODO name not working so add URL
+@FeignClient(name = "product-service",url = "http://localhost:8085")
 public interface ProductFeignClient {
 
-    @GetMapping("/products/{productId}")
+    @GetMapping("/api/products/{productId}")
     ProductDTO getProductById(@PathVariable Long productId);
 
-    @GetMapping("/products/ids/{productIds}")
+    @GetMapping("/api/products/ids/{productIds}")
     List<ProductDTO> getProductByIds(@PathVariable List<Long> productId);
 }
