@@ -44,7 +44,7 @@ public class ProductService {
         if (product.isPresent()) {
             return productMapper.toProduct(product.get());
         } else {
-            throw new RuntimeException("No Product found with id " + productId);
+            throw new ProductNotFoundException("No Product found with id " + productId);
         }
     }
 
@@ -58,7 +58,7 @@ public class ProductService {
         if (!products.isEmpty()) {
             return productMapper.toProductList(products);
         } else {
-            throw new RuntimeException("No Products found with ids " + productIds);
+            throw new ProductNotFoundException("No Products found with ids " + productIds);
         }
     }
 

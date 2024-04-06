@@ -1,0 +1,53 @@
+version: '3'
+services:
+
+  user:
+    build:
+      context: .
+    ports:
+      - "8088:8088"
+    networks:
+      - mynetwork
+    depends_on:
+      - prometheus
+      - grafana
+      - zipkin
+    environment:
+      - EUREKA_DEFAULT_ZONE=http://service-discovery-server:8761/eureka/
+      - ZIPKIN_URL=http://zipkin:9411
+
+  prometheus:
+    image: prom/prometheus
+    container_name: my-prometheus
+    networks:
+      - mynetwork
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana-oss:latest
+    container_name: my-grafana
+    depends_on:
+      - prometheus
+    networks:
+      - mynetwork
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: my-zipkin
+    networks:
+      - mynetwork
+    ports:
+      - "9411:9411"
+    restart: unless-stopped
+
+networks:
+  mynetwork:
+    driver: bridge
+    external: true

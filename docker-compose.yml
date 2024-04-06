@@ -19,7 +19,8 @@ services:
     depends_on:
       - service-discovery-server
     environment:
-    - EUREKA_DEFAULT_ZONE=http://service-discovery-server:8761/eureka/  
+    - EUREKA_DEFAULT_ZONE=http://service-discovery-server:8761/eureka/ 
+    - ZIPKIN_URL=http://zipkin:9411 
 
   product:
     build:
@@ -30,9 +31,12 @@ services:
       - mynetwork
     depends_on:
       - service-discovery-server
+      - woo-prometheus
+      - woo-grafana
+      - woo-zipkin 
     environment:
     - EUREKA_DEFAULT_ZONE=http://service-discovery-server:8761/eureka/  
-
+    - ZIPKIN_URL=http://zipkin:9411
 
   user:
     build:
@@ -43,8 +47,12 @@ services:
       - mynetwork
     depends_on:
       - service-discovery-server
+      - woo-prometheus
+      - woo-grafana
+      - woo-zipkin 
     environment:
     - EUREKA_DEFAULT_ZONE=http://service-discovery-server:8761/eureka/  
+    - ZIPKIN_URL=http://zipkin:9411
 
   order:
     build:
@@ -53,10 +61,15 @@ services:
       - "8087:8087"  # Adjust the ports as needed
     networks:
       - mynetwork
+      
     depends_on:
       - service-discovery-server
+      - woo-prometheus
+      - woo-grafana
+      - woo-zipkin 
     environment:
     - EUREKA_DEFAULT_ZONE=http://service-discovery-server:8761/eureka/  
+    - ZIPKIN_URL=http://zipkin:9411
 
   gateway:
     build:
@@ -67,9 +80,48 @@ services:
       - mynetwork
     depends_on:
       - service-discovery-server
+      - woo-prometheus
+      - woo-grafana
+      - woo-zipkin 
     environment:
     - EUREKA_DEFAULT_ZONE=http://service-discovery-server:8761/eureka/  
+    - ZIPKIN_URL=http://zipkin:9411
+
+  woo-prometheus:
+    image: prom/prometheus
+    container_name: my-prometheus
+    networks:
+      - mynetwork
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    restart: unless-stopped  
+
+
+  woo-grafana:
+    image: grafana/grafana-oss:latest
+    container_name: my-grafana
+    depends_on:
+      - woo-prometheus
+    networks:
+      - mynetwork
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+
+  woo-zipkin:
+    image: openzipkin/zipkin
+    container_name: my-zipkin
+    depends_on:
+      - woo-prometheus
+    networks:
+      - mynetwork
+    ports:
+      - "9411:9411"
+    restart: unless-stopped
 
 networks:
   mynetwork:
     driver: bridge
+    external: true
