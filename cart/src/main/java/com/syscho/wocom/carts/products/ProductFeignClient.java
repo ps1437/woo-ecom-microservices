@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 
 //TODO name not working so add URL
-@FeignClient(name = "product-service",url = "http://localhost:8085")
+@FeignClient(name = "product-service", url = "${product-service.url}")
 public interface ProductFeignClient {
 
     @GetMapping("/api/products/{productId}")

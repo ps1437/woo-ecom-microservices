@@ -22,6 +22,9 @@ spring:
         enable: false
 
 
+
+
+
 logging:
   pattern:
     correlation: "[${spring.application.name:},%X{traceId:-},%X{spanId:-}] "
@@ -84,3 +87,5 @@ syscho:
     url: http://localhost:8086
 
 
+product-service:
+  url: ${PRODUCT_SERVICE_URL:http://localhost:8085}
