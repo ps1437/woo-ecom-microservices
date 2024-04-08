@@ -1,5 +1,8 @@
-package com.syscho.wocom.carts;
+package com.syscho.wocom.carts.config;
 
+import com.syscho.wocom.carts.CartNotFoundException;
+import io.github.resilience4j.ratelimiter.RequestNotPermitted;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
@@ -38,5 +41,12 @@ public class RestExceptionHandlerAdvice {
     public ProblemDetail handleValidationExceptions(Exception ex) {
         log.error("Error handleValidationExceptions : {}", ex.getMessage(), ex);
         return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, ex.getMessage());
+    }
+
+    @ExceptionHandler(RequestNotPermitted.class)
+    public ProblemDetail handleRequestNotPermitted(RequestNotPermitted ex, HttpServletRequest request) {
+        log.warn("Request to path '{}' is blocked due to rate-limiting. {}",
+                request.getRequestURI(), ex.getMessage());
+        return ProblemDetail.forStatusAndDetail(HttpStatus.TOO_MANY_REQUESTS, "Too many requests");
     }
 }
